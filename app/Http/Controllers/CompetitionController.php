@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
+
 use App\Http\Requests;
 
 use App\Repositories\CompRepository;
@@ -45,8 +47,14 @@ class CompetitionController extends SiteController
 
         return $this->renderOutPut();
     }
-    
-   
+
+    public function getRoles(){
+        return \App\Role::all();
+    }
+
+    public function getUsers(){
+        return \App\User::all();
+    }
     
     public function getArticles(){
         
@@ -55,16 +63,27 @@ class CompetitionController extends SiteController
         return $articles;
     }
 
-    public function getComps ($alias = FALSE){
-        
-      $competitions = $this->c_rep->getc(['*'],FALSE, TRUE); 
-      $content = view(env('THEME').'.comp')->with('competitions', $competitions)->render();
-      $this->vars = array_add($this->vars, 'content', $content);
-      
-      return $competitions;
-        
+    public function getComps ($alias = FALSE)
+    {
+
+
+        $competitions = $this->c_rep->getc(['*'], FALSE, TRUE);
+        if (\Auth::user()->hasRole('Admin')) {
+            $content = view(env('THEME') . '.comp')->with('competitions', $competitions)->render();
+            $this->vars = array_add($this->vars, 'content', $content);
+        } else {
+            $content = view(env('THEME') . '.comp1')->with('competitions', $competitions)->render();
+            $this->vars = array_add($this->vars, 'content', $content);
+        }
+        return $competitions;
+
     }
-    
+
+
+
+
+      
+
     
     
     /**public function getplaces (){
@@ -101,9 +120,12 @@ class CompetitionController extends SiteController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function show($alias)
     {
         $competition = $this->c_rep->onec($alias);
+
 
 
         $content = view(env('THEME').'.competition_content')->with('competition', $competition)->render();
@@ -114,15 +136,32 @@ class CompetitionController extends SiteController
         return $this->renderOutPut();
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $alias)
     {
-        //
+        $status = $request->input('status');
+        //if($request->submit == "Save") {
+        if($request){
+        DB::table('competitions')->where(['alias' => $alias])->update(array('status'=>$status));
+
+       }
+        $competition = $this->c_rep->onec($alias);
+
+//$competition = \App\Competition::all();
+
+        $content = view(env('THEME').'.comp2')->with(['competition'=>$competition, $status=>'status'])->render();
+
+        $this->vars = array_add($this->vars, 'content', $content);
+
+
+        return $this->renderOutPut();
     }
 
     /**

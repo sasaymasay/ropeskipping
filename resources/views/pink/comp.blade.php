@@ -1,25 +1,11 @@
 @if($competitions)
+    <p class="button signup"><a href="{{ route('signup.create') }}">Записаться</a></p>
 <div class="cols-1">
+
     @foreach($competitions as $competition)
-    @if($competition->status === 1)
-    <div class="pricing_box large radius-right">
-        <div class="header">
-            <h3>{{ $competition->title }}</h3>
-        </div>
-        <ul>
-            <li>Организатор : {{ $competition->organizator }}</li>
-            <li>Информация : {{ str_limit($competition->info,200) }}</li>
-            <li>Город : {{ $competition->city }}</li>
-            <li>Адрес : {{ $competition->adress }}</li>
-            <li>Место : {{ $competition->place }}</li>
-            <li>Время начала : {{ $competition->datebegin }}</li>
-            <li>Время окончания : {{ $competition->dateend }}</li>
-        </ul>
-        <p class="button signup"><a href="{{ route('competitions.show', ['alias'=>$competition->alias]) }}">Записаться</a></p>
-    </div>
-    <div style="clear:both"></div>
-    <br>
-    @else
+
+
+
     <div class="pricing_box radius-right">
         <div class="header">
             <h3>{{ $competition->title }}</h3>
@@ -34,10 +20,15 @@
             <li>Время окончания : {{ $competition->dateend }}</li>
         </ul>
         <p class="button signup"><a href="{{ route('competitions.show', ['alias'=>$competition->alias]) }}">Поcмотреть результаты</a></p>
+        <p class="button signup"><a href="{{ route('competitions.edit', ['alias'=>$competition->alias]) }}">Закрыть/Открыть соревнование</a></p>
+        @if($competition->status == 1)
+
+
     </div>
     <div style="clear:both"></div>
     <br>
 @endif
+
 @endforeach
 </div>
 

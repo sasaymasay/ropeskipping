@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Competition extends Model
 {
     protected $fillable = [
-        'title', 'otganizator', 'info', 'adress', 'place', 'city', 'alias'
+        'title', 'otganizator', 'info', 'adress', 'place', 'city', 'alias', 'status',
     ];
     
     public function users() {

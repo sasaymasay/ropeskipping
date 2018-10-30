@@ -171,7 +171,7 @@ class ScoreController extends AdminController
         DB::table('results')->where(['user_id'=>$use, 'discipline_id'=>$disc, 'group_id'=>$grp, 'rank_id'=>$rnk, 'competition_id'=>$comps, 'group_id'=>$grp])->update(array('final_score'=>$final_score));*/
 
         
-        $this->content = view(env('THEME').'.admin.score_create_content')->with(['pattern'=>$pattern,'count_score'=>$count_score,'comps'=>$comps, 'grp'=>$grp, 'final_score'=>$final_score, 'judges'=>$judges, 'result'=>$result,'competitions'=>$competitions, 'groups'=>$groups, 'disciplines'=>$disciplines,'disc'=>$disc, 'genders'=>$genders, 'ages'=>$ages, 'ranks'=>$ranks, 'users'=>$users, 'use'=>$use])->render();
+        $this->content = view(env('THEME').'.admin.score_create_content')->with(['comps'=>$comps, 'grp'=>$grp, 'judges'=>$judges, 'result'=>$result,'competitions'=>$competitions, 'groups'=>$groups, 'disciplines'=>$disciplines,'disc'=>$disc, 'genders'=>$genders, 'ages'=>$ages, 'ranks'=>$ranks, 'users'=>$users, 'use'=>$use])->render();
         
         
         

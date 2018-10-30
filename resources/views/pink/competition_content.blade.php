@@ -4,6 +4,8 @@
         @if($competition)
         <div class="thumbnail">
 
+
+
             <!-- post title -->
             <h1 class="post-title"><a href="#">{{ $competition->title }}</a></h1>
             <!-- post featured -->
@@ -13,11 +15,17 @@
                 <span class="day">{{ $competition->dateend}}</span>
             </p>
         </div>
+
+
         <!-- post meta -->
         <div class="meta group">
             <p class="author"><span>by <a href="#" title="{{ $competition->info }}" rel="author">{{ $competition->place }}</a></span></p>
            
         </div>
+            <form method="PATCH">
+                <input type="hidden" name="status" value=0>
+                <button type="submit" name = "submit" value = "Save"></button>
+            </form>
         <!-- post content -->
         <div class="the-content single group">
             <p>{{ $competition->info }}</p>

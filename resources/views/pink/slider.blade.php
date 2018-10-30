@@ -15,7 +15,7 @@
                         </div>
                         <p><a href="{{ route('signup.index') }}" class="btn   btn-beetle-bus-goes-jamba-juice-4 btn-more-link">Записаться на соревнования</a></p>
                     </div>
-                </div>   
+                </div>
         </li>
         @endforeach
     </ul>

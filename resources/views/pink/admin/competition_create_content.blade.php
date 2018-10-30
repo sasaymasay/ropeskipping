@@ -81,17 +81,20 @@
                     {!! Form::text('place',isset($competition->place) ? $competition->place  : old('place'), ['placeholder'=>'Введите описание дисциплины']) !!}
                 </div>
             </li>
-             <li class="submit-button"> 
-                {!! Form::button('Сохранить', ['class' => 'btn btn-the-salmon-dance-3','type'=>'submit']) !!}			
+            <li class="submit-button">
+                {!! Form::button('Сохранить', ['class' => 'btn btn-the-salmon-dance-3','type'=>'submit']) !!}
             </li>
-             </ul>
-            
+        </ul>
+
               @if(isset($competition->id))
             <input type="hidden" name="_method" value="PUT">		
 
             @endif
             
             {!! Form::close() !!}
+        <form method="GET">
+            {!! Form::button('Завершить регистрацию', ['class' => 'btn btn-french-5','type'=>'submit']) !!}
+        </form>
             
               <div class="clearer"></div>
                         <hr />
@@ -100,7 +103,7 @@
                 
                         <br>
                 {!! Form::button('Поиск', ['class' => 'btn btn-the-salmon-dance-3','type'=>'search']) !!}	
-                
+            </form>
                
                 
            
@@ -264,6 +267,6 @@
          @if(isset($result->id))
             <input type="hidden" name="_method" value="PUT">		
 
-            @endif
+         @endif
     </div>
 </div>
